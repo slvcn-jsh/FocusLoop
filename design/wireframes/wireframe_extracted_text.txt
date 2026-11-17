@@ -1,0 +1,514 @@
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+Design foundation
+Product principles, screen inventory and handoff boundaries
+
+
+
+
+                                                                            Design rules
+      FocusLoop                                                             These are decisions for Canva to preserve, not
+      Make screen time intentional.                                         assumptions about verified Android capabilities.
+
+      A calm, compact, research-informed Android
+                                                                            01 Information density
+      digital wellbeing experience combining detailed
+                                                                            First viewport: usage summary, primary action, and
+      usage analytics, user-defined intentions,
+                                                                            meaningful context. No giant empty hero.
+      lightweight reflection, and voluntary
+      commitments.                                                          02 Separate evidence
+                                                                            Device usage statistics and self-reported intention
+                                                                            outcomes must be labeled separately.
+      ANDROID FIRST / iOS FUTURE
+                                                                            03 Voluntary control
+                                                                            Users may skip goals, decline permissions, dismiss prompts,
+                                                                            and change limits.
+
+
+                                                                            04 Responsive
+                                                                            Fold5 cover display, unfolded layout, split screen, and
+                                                                            scalable text.
+
+
+                                                                            05 Visual tone
+                                                                            Quiet, neutral, clear hierarchy; no shame or punitive
+                                                                            streak language.
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                 01
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+Screen inventory & navigation
+Four bottom tabs; supporting screens and sheets do not become extra tabs
+
+
+
+
+         HOME                                                    USAGE             FOCUS                SETTINGS
+
+         - Today overview                                        - Time filters    - Saved intentions   - My goals
+
+         - Active session                                        - App breakdown   - New intention      - Permissions
+
+         - Quick start                                           - App detail      - Active session     - Notifications
+
+         - Top apps                                              - Data coverage   - History            - Privacy & data
+
+
+
+
+           FIRST LAUNCH
+
+           Welcome > Choose personal goals (optional) > Privacy explanation > Usage Access
+           (optional) > Home
+
+           SESSION FLOW: Focus > Intention editor > Active session > Checkpoint sheet >
+           Reflection > Summary
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                  02
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+01 / Welcome & goals
+Two short onboarding screens; goal selection personalizes emphasis, not access
+
+
+
+            Welcome                                                         Next: Choose your goals
+                                                                            Separate long-term goals from individual session
+           Use your phone with purpose.
+                                                                            intentions.
+
+
+              What FocusLoop helps with                                     Choices (multi-select)
+              Understand usage. Set intentions. Reflect                     Reduce distractions / Understand screen time / Study or
+              without judgment.                                             work / Reduce unwanted scrolling / Build better habits /
+                                                                            Other.
+
+
+                                                                            Controls
+                                                                            Continue, Skip, Back. Change choices later in Settings > My
+                                                                            Goals.
+                                  Get started
+                                                                            Research trace
+                                                                            Personalization is a design hypothesis informed by StayFree
+                                                                            onboarding and autonomy findings; not proven effective.
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                 03
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+02 / Privacy & permission
+No forced permission; clear empty state if usage access is declined
+
+
+
+            Privacy & usage access                                          Permission behavior
+                                                                            The experience must work without Usage Access.
+           Your data stays in your control.
+
+                                                                            Enabled
+              Local-first
+                                                                            Show supported metrics, their period, and data provenance.
+              No account required. Session and reflection
+              records stored locally.
+                                                                            Declined
+                                                                            Usage page shows a helpful permission explanation; Focus
+                                                                            remains functional.
+
+
+                                                                            Revoked
+              Optional usage access
+              Needed for per-app analytics, not for manual
+                                                                            Do not show cached usage as current; distinguish
+              focus sessions.                                               unavailable from zero.
+
+
+                                                                            Guardrail
+                                                                            Never promise automatic intention detection or unrestricted
+                                                                            app blocking.
+                                Enable usage access
+
+
+                                         Not now
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                 04
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+03 / Home dashboard
+Compact first viewport: overview, primary action, top applications
+
+
+
+            FocusLoop                                                           Home interactions
+                                                                                One glance should explain current activity and provide
+           Today at a glance
+                                                                                a direct action.
+
+              App usage                               Intentions                Tap usage summary
+              4h 28m                                  2 recorded
+                                                                                Open Usage tab, retaining the selected date range.
+
+
+                                                                                Tap app row
+                                                                                Open App Detail for that package.
+              Start with intention
+              Quick templates: Study / Messages / Social                        Tap intention template
+                                                                                Open prefilled editor, then Start.
+
+
+                                                                                Active session variant
+           Most-used apps
+                                                                                Replace quick-start prominence with an active session
+           Messenger                                               1h 42m       resume card.
+
+           YouTube                                                 1h 16m
+                                                                                No permission variant
+           Instagram                                               48m
+                                                                                Show a compact enable-analytics card, not fake zeros.
+
+
+
+             Home               Usage              Focus             Settings
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                05
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+04 / Usage overview
+StayFree-inspired analytical depth with explicit data quality labels
+
+
+
+            Usage analytics                                                     Analytics requirements
+                                                                                Usage metrics are a core feature, but precision depends
+           Today 7d 14d 28d Custom
+                                                                                on Android APIs and retained history.
+
+              Daily average                                                     Filters
+              5h 46m / example only
+                                                                                Today, yesterday, 7/14/28 days, and custom range when data
+                                                                                permits.
+
+
+                                                                                Provenance
+              Daily trend
+                                                                                Separate app foreground duration, device screen interactive
+                                                                                time, and FocusLoop session time.
+
+
+                                                                                Data gaps
+                                                                                Show incomplete or unavailable intervals clearly.
+
+
+           Application breakdown                                                Fold5 caution
+           Messenger                                             13h 36m        Multi-window can complicate summed per-app totals; do not
+                                                                                equate them with screen-on time.
+           TikTok                                                6h 40m
+
+           YouTube                                               5h 15m
+
+
+             Home               Usage              Focus             Settings
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                     06
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+05 / App detail & historical trends
+Tap an application to inspect available usage without inventing event precision
+
+
+
+            < App details                                                         App detail behavior
+                                                                                  The user should understand exactly which data comes
+           YouTube
+                                                                                  from Android.
+
+
+              Selected period                                                     Header
+              5h 15m / example only                                               App icon, name, package identifier when useful.
+
+
+                                                                                  Charts
+                                                                                  Daily and weekly history; choose custom period where
+                                                                                  supported.
+              Usage by day
+
+                                                                                  Link to Focus
+                                                                                  Optional create intention for this app; never automatically
+                                                                                  label it distracting.
+
+
+                                                                                  Edge states
+                                                                                  No history, insufficient permission, partial coverage, and
+              Session context
+                                                                                  unavailable app labels.
+              Observed usage is not proof of intention.
+
+
+
+
+             Home               Usage              Focus             Settings
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                       07
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+06 / Focus library & intention editor
+Fast reusable templates; minimal typing and optional target application
+
+
+
+            Focus                                                               Editor fields
+                                                                                Prefer a short editor sheet or page with meaningful
+           What do you intend to do?
+                                                                                defaults.
+
+              Saved: Watch CS50 lecture                                         Required
+              YouTube / 60 min / reminder optional
+                                                                                Intention title; planned duration.
+
+
+                                                                                Optional
+                                                                                Target app; reminder preference; save as template.
+              Saved: Check messages
+              Messenger / 10 min                                                Validation
+                                                                                Reasonable duration range; edit before starting; cancel
+                                                                                without loss.
+
+
+                                    New intention                               Principle
+                                                                                Personal goals are not the same as a session intention. A
+                                                                                goal persists; a session has a start and outcome.
+
+
+
+
+             Home               Usage              Focus             Settings
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                   08
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+07 / Active session & checkpoint
+Session survives leaving FocusLoop; extensions preserve the original target
+
+
+
+            Active session                                                      Checkpoint sheet
+                                                                                Shown at a scheduled checkpoint when feasible, not an
+           Watch CS50 lecture
+                                                                                unbreakable lock screen.
+
+
+                                                                                Choices
+                                                                                Finish / Extend / Revise goal / Dismiss.
+
+
+                                      60:00                                     Extension
+                                                                                Record original target, extension amount, and time; never
+                                   Planned duration                             overwrite history.
+
+
+                                                                                Safe exit
+                                                                                User can always dismiss or disable reminders.
+
+
+                                                                                Background behavior
+                      Pause                              Extend                 Reminder timing is best-effort; session timing uses
+                                                                                persisted records.
+
+
+                                         Finish                                 Research trace
+                                                                                MindPhone reflection burden; one sec friction; your
+                                                                                ScreenZen renewal observation.
+             Home               Usage              Focus             Settings
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                   09
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+08 / Reflection & session summary
+No judgment; missing outcomes are not counted as successful sessions
+
+
+
+            Session reflection                                                  Summary screen
+                                                                                After reflection, display a clear comparison with a
+           How did it go?
+                                                                                path back to Home or Focus history.
+
+
+                                                                                Data
+               Completed
+                                                                                Original intention, planned duration, elapsed session time,
+                                                                                extensions, selected outcome.
+
+
+               Partially completed                                              Unknowns
+                                                                                Unreported outcome stays missing; app usage does not
+                                                                                establish task success.
+               Not completed
+                                                                                Tone
+                                                                                Neutral language; no shame or punishment.
+               Prefer not to answer
+                                                                                Insights
+                                                                                Aggregate only documented sessions and clearly show
+                                                                                response completeness.
+
+                                  Save reflection
+
+
+             Home               Usage              Focus             Settings
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                     10
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+09 / Settings, goals & privacy
+Centralize controls without cluttering the daily dashboard
+
+
+
+            Settings                                                            Settings rules
+                                                                                Keep advanced controls discoverable without making
+                                                                                onboarding burdensome.
+              My goals
+              Change onboarding selections                                      Goals
+                                                                                Multi-select, optional, editable; no core feature lockout.
+              Usage access
+              Permission status and explanation                                 Privacy
+                                                                                No account required, local-first, explicit data deletion.
+              Notifications
+              Reminder preferences                                              Permissions
+                                                                                Explain why a permission is needed and how to revoke it.
+
+              Focus preferences
+              Defaults and checkpoint options                                   Advanced
+                                                                                App blocking, accessibility access, cloud sync, AI
+                                                                                coaching, and iOS are not part of initial release.
+              Data and privacy
+              Review, delete, and export if supported
+
+
+
+              About
+              Research basis and limitations
+
+
+             Home               Usage              Focus             Settings
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                    11
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+10 / Fold5 adaptive behavior
+Layout follows available window size, not a fixed phone model
+
+
+
+
+         COMPACT / COVER                                                    EXPANDED / UNFOLDED
+
+
+            Summary                                                          Overview                                      Quick actions
+            Single-column cards                                              Usage + intentions                            Templates + active session
+
+
+
+
+            Quick start
+            Prominent action
+
+
+                                                                             Analytics / details
+                                                                             Chart and selected app details side-by-side
+
+            Top apps
+            Short list / view all
+
+
+
+
+     Design for compact, medium and expanded windows; test resizing, split-screen and large text.
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                               12
+FOCUSLOOP / CANVA DESIGN REFERENCE
+
+
+Canva handoff checklist
+Use this PDF as structural reference, not as a finished aesthetic
+
+
+
+
+       PASS 1 / SYSTEM                                          Logo exploration, typography, palette, spacing, cards, buttons, bottom
+                                                                navigation, charts.
+
+
+       PASS 2 / CORE                                            Home, Usage overview, App detail, Focus library, Intention editor, Settings.
+
+
+
+
+       PASS 3 / FLOWS                                           Welcome, goals, privacy, permissions, active session, checkpoint, reflection,
+                                                                summary.
+
+
+       PASS 4 / STATES                                          No permission, no data, partial history, active session, paused, errors, data
+                                                                deletion.
+
+
+       PASS 5 / ADAPTIVE                                        Fold5 cover and unfolded variants, resize and accessibility behavior.
+
+
+
+
+       REVIEW GATE                                              Check research traceability, clear metrics, voluntary controls, no fabricated
+                                                                platform capability.
+
+
+
+
+Wireframe only - not a final visual design | All metrics are illustrative                                                                       13
+

@@ -1,0 +1,200 @@
+{
+  "date": "2026-11-17",
+  "versionName": "0.3-native-ui",
+  "versionCode": 3,
+  "applicationId": "dev.focusloop.spike",
+  "implementationCommit": "6ce57556b8137b8bae87ece67d28b6c40c2b649f",
+  "device": {
+    "model": "SM-F946B",
+    "android": 15,
+    "api": 35,
+    "densityDpi": 420,
+    "finalSuiteDisplayPx": [
+      1812,
+      2176
+    ],
+    "earlierCoverDisplayPx": [
+      904,
+      2316
+    ]
+  },
+  "build": "passed",
+  "jvm": {
+    "total": 36,
+    "failures": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "name": "dev.focusloop.spike.domain.CompleteFlowRulesTest",
+        "tests": "7",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "dev.focusloop.spike.domain.IntentionTest",
+        "tests": "3",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "dev.focusloop.spike.domain.SessionTest",
+        "tests": "18",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "dev.focusloop.spike.domain.UsageTest",
+        "tests": "8",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ]
+  },
+  "android": {
+    "total": 26,
+    "failures": 0,
+    "skipped": 0,
+    "runnerSeconds": 26.438,
+    "coreRepository": 11,
+    "uiStorageIntegration": 3,
+    "localPreferences": 1,
+    "legacyStorage": 3,
+    "usageDevice": 1,
+    "composeFlows": 7,
+    "uiInteractionMethod": "Real controls activated through semantic OnClick actions with synthetic injected state; physical touch handling is not established by this suite"
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 21,
+    "information": 1
+  },
+  "upgradePreservation": {
+    "coreSessionPlansEventsReflectionsUnchanged": true,
+    "legacySourceUnchanged": true,
+    "comparison": "all user rows before/after, nullable migration note normalized",
+    "privateDataPublished": false
+  },
+  "usageAccess": "user-granted AppOps allow, no shell permission mutation; six period queries passed",
+  "referenceAssetsUnchanged": true,
+  "canvaLiveTraversal": "unavailable; local exports used",
+  "screenshots": {
+    "data": "synthetic only; native calendar contains no usage/session data",
+    "fixturesDp": [
+      360,
+      680,
+      320
+    ],
+    "largeFontScale": 2.0,
+    "images": [
+      {
+        "file": "compact-active.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-app-detail.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-editor.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-empty-usage.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-focus.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-home.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-privacy.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-reflection.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-settings.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-summary.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "compact-usage.png",
+        "widthPx": 220,
+        "heightPx": 210
+      },
+      {
+        "file": "compact-welcome.png",
+        "widthPx": 945,
+        "heightPx": 2176
+      },
+      {
+        "file": "large-font-home.png",
+        "widthPx": 840,
+        "heightPx": 2176
+      },
+      {
+        "file": "large-font-settings.png",
+        "widthPx": 840,
+        "heightPx": 2176
+      },
+      {
+        "file": "unfolded-custom-dates.png",
+        "widthPx": 945,
+        "heightPx": 1491
+      },
+      {
+        "file": "unfolded-focus.png",
+        "widthPx": 1785,
+        "heightPx": 2176
+      },
+      {
+        "file": "unfolded-home.png",
+        "widthPx": 1785,
+        "heightPx": 2176
+      },
+      {
+        "file": "unfolded-settings.png",
+        "widthPx": 1785,
+        "heightPx": 2176
+      },
+      {
+        "file": "unfolded-usage.png",
+        "widthPx": 1785,
+        "heightPx": 2176
+      }
+    ]
+  },
+  "apkSha256": "04331e85d7428cc205e5db0cf39b190ed7dcc6f50463aa3799348d5a7452e88a",
+  "remaining": [
+    "actual new-UI fold/rotation/multi-window transitions",
+    "TalkBack/system font scaling",
+    "matched StayFree accuracy comparison",
+    "real permission revoke/regrant",
+    "actual notification delivery/idle/battery restrictions",
+    "actual reboot and full navigation/process recovery",
+    "release dependency/target/signing/backup review"
+  ]
+}

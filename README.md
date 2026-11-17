@@ -1,6 +1,6 @@
-# FocusLoop — Android Development Starter
+# FocusLoop — native Android
 
-Research-backed, native Android digital wellbeing application. The supplied documentation and visual-reference starter is preserved in Git. `android/` contains the **Phase 2 core prototype**, following the initial feasibility spike. See the [audit](docs/engineering/PHASE_0_AUDIT.md), [historical Phase 1 findings](docs/engineering/PHASE_1_RESULTS.md), [Phase 2 scope](docs/engineering/PHASE_2_PLAN.md), and [current device/core results](docs/engineering/PHASE_2_RESULTS.md).
+Research-informed, native Android digital wellbeing application. The supplied research and visual references are preserved in Git. `android/` contains the **0.3 native interface**, built on the verified Room core. See the [UI implementation blueprint](docs/design/UI_IMPLEMENTATION_BLUEPRINT.md), [current UI/device results](docs/engineering/NATIVE_UI_RESULTS.md), [audit](docs/engineering/PHASE_0_AUDIT.md), [historical feasibility findings](docs/engineering/PHASE_1_RESULTS.md), and [historical core results](docs/engineering/PHASE_2_RESULTS.md).
 
 ## Read first
 1. `AGENTS.md` — permanent Codex rules.
@@ -19,4 +19,4 @@ Verified Android/platform behavior and safety > approved product requirements > 
 - Earlier wireframe: `design/wireframes/FocusLoop_Canva_Wireframe_Reference_v1.pdf`.
 
 ## Status
-The user authorized continuation after Phase 1 and connected an SM-F946B Fold5 running Android 15/API 35. The next core slice adds saved intentions, durable Room session/event history, and separate optional reflection while preserving the existing Phase 1 record. Full Canva production UI and later analytics/integration phases remain separate work. See the current results for actual test outcomes and remaining physical checks; prototype code is not a production-readiness claim.
+The user authorized the complete native UI/flow sequence after the feasibility and core phases. Home, Usage, Focus, Settings, optional onboarding, intentions, session checkpoints, reflection, history and privacy controls are implemented. Local Canva exports guide the visual identity; live Canva interaction traversal remains unavailable. Android usage estimates retain explicit coverage limits. The connected device is an SM-F946B Fold5 running Android 15/API 35. See the current report for test evidence, upgrade preservation and remaining manual checks. This development build is not a production-release or research-effectiveness claim.

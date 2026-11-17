@@ -1,6 +1,6 @@
 # FocusLoop — Android Development Starter
 
-Research-backed, native Android digital wellbeing application. The supplied documentation and visual-reference starter is preserved in Git. `android/` now contains the **phase 1 feasibility experiment**, not the production app. See [audit](docs/engineering/PHASE_0_AUDIT.md), [findings](docs/engineering/PHASE_1_RESULTS.md), and [Fold5 test procedure](docs/qa/PHASE_1_FOLD5_CHECKLIST.md).
+Research-backed, native Android digital wellbeing application. The supplied documentation and visual-reference starter is preserved in Git. `android/` contains the **Phase 2 core prototype**, following the initial feasibility spike. See the [audit](docs/engineering/PHASE_0_AUDIT.md), [historical Phase 1 findings](docs/engineering/PHASE_1_RESULTS.md), [Phase 2 scope](docs/engineering/PHASE_2_PLAN.md), and [current device/core results](docs/engineering/PHASE_2_RESULTS.md).
 
 ## Read first
 1. `AGENTS.md` — permanent Codex rules.
@@ -19,4 +19,4 @@ Verified Android/platform behavior and safety > approved product requirements > 
 - Earlier wireframe: `design/wireframes/FocusLoop_Canva_Wireframe_Reference_v1.pdf`.
 
 ## Status
-Research synthesis and initial UX direction documented; limited native diagnostic source added under `android/`. Actual Fold5 validation and production UI remain pending. **Stop gate: review phase 1 findings before authorizing phase 2 or later.** The results report distinguishes automated evidence from unrun device checks.
+The user authorized continuation after Phase 1 and connected an SM-F946B Fold5 running Android 15/API 35. The next core slice adds saved intentions, durable Room session/event history, and separate optional reflection while preserving the existing Phase 1 record. Full Canva production UI and later analytics/integration phases remain separate work. See the current results for actual test outcomes and remaining physical checks; prototype code is not a production-readiness claim.

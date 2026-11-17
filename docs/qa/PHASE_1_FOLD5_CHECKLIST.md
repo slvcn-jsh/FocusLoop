@@ -1,5 +1,7 @@
 # Phase 1 physical Fold5 verification
 
+This checklist retains its initial statuses as the baseline. See [current device/core results](../engineering/PHASE_2_RESULTS.md) for later executed checks and remaining gaps.
+
 All physical tests below start as NOT RUN. Emulator evidence in PHASE_1_RESULTS.md does not change their status. Use synthetic intention text; keep real per-app usage, device identifiers and screenshots private. Record OS/build locally, but redact serials before sharing.
 
 ## Setup and evidence template

@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-17",
+  "scope": "Phase 1 physical follow-up and Phase 2 core only",
+  "jvmSuites": [
+    {
+      "name": "dev.focusloop.spike.domain.IntentionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        "validatesDurationAndTargetWithoutInferringPurpose",
+        "optionalTargetCanBeAbsentAndTitleIsTrimmed",
+        "skippedAndUnreportedAreDistinctFromCompletion"
+      ]
+    },
+    {
+      "name": "dev.focusloop.spike.domain.SessionTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        "newRepositoryRestoresFromPersistedAnchor",
+        "backwardsMonotonicClockRequiresRecovery",
+        "onlyOneOpenSession",
+        "unavailableBootIdentityIsExplicit",
+        "extensionAppendsAndPreservesOriginalPlan",
+        "writeFailureDoesNotReportANewSession",
+        "validatesTitleAndDuration",
+        "invalidExtensionRejected",
+        "targetDoesNotForceCompletion",
+        "rebootEvenWithGreaterUptimeDoesNotInventDuration",
+        "wallClockJumpsDoNotChangeDuration",
+        "finishAndCancelAreTerminalAndAllowAnotherExperiment",
+        "activeExcludesPauseAndElapsedIncludesIt",
+        "pausedSessionStillOwnsTheSlot",
+        "invalidPauseResumeSequenceRejected",
+        "recoveryResumesOnlyFromExplicitNewAnchor",
+        "sleepAndBackgroundIntervalsAreIncludedFromMonotonicClock",
+        "runningRebootUsesOnlyPersistedCheckpoint"
+      ]
+    },
+    {
+      "name": "dev.focusloop.spike.domain.UsageTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        "invalidRecordsAreNotShownAsValidUsage",
+        "emptyNullAndMeasuredZeroAreDistinct",
+        "dailyBucketExpansionIsNotClippedOrHidden",
+        "localDayRangesFollowManilaCalendar",
+        "calendarDayIsNotAlways24Hours",
+        "midnightDoesNotCreateFakeTodayUsage",
+        "grantedDeniedRevokedAndUnavailableAreDistinct",
+        "perPackageBucketsAreSummedAndRanked"
+      ]
+    }
+  ],
+  "lint": [
+    {
+      "id": "OldTargetApi",
+      "severity": "Warning",
+      "message": "Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details."
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.compose:compose-bom than 2024.10.00 is available: 2026.09.00"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.activity:activity-compose than 1.9.3 is available: 1.13.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.8.7 is available: 2.11.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.lifecycle:lifecycle-runtime-compose than 2.8.7 is available: 2.11.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.room:room-runtime than 2.7.2 is available: 2.8.5"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.room:room-compiler than 2.7.2 is available: 2.8.5"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.test.ext:junit than 1.2.1 is available: 1.3.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.test:runner than 1.6.2 is available: 1.7.0"
+    },
+    {
+      "id": "AutoboxingStateCreation",
+      "severity": "Information",
+      "message": "Prefer `mutableLongStateOf` instead of `mutableStateOf`"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    }
+  ],
+  "deviceTests": {
+    "result": "PASS",
+    "tests": 15,
+    "suiteCounts": {
+      "CoreRepositoryTest": 11,
+      "SessionDatabaseTest": 3,
+      "UsageDeviceTest": 1
+    },
+    "data": "Synthetic isolated databases; usage availability checked without exporting rows"
+  },
+  "physical": {
+    "model": "SM-F946B",
+    "android": "15",
+    "api": 35,
+    "build": "AP3A.240905.015.A2.F946BXXS5EYI1",
+    "fontScale": 1.0,
+    "legacySourceUnchanged": true,
+    "importPreservedPlanStateAndEveryEvent": true,
+    "noReflectionInvented": true,
+    "physicalBackgroundProcessKilled": true,
+    "sameBootPersistedRecordSurvivedRestart": true,
+    "uiTimerContinuity": "Not automatically asserted; accessibility dump could not obtain idle state while timer updates",
+    "visibleStaticLabelBounds": {},
+    "userReported": {
+      "visibleSameSessionAfterRestart": true,
+      "basicFoldUnfoldControlsUsable": true,
+      "response": "Same session; folding and unfolding work",
+      "evidenceType": "User confirmation in conversation; not automated"
+    }
+  },
+  "buildSummary": "BUILD SUCCESSFUL in 1m 32s",
+  "debugApkSha256": "6c7bd01bf34e833e5f00f97d8c56308782fc034b3ba3a94d45499eef6f50601b",
+  "sourceDesignAssetsUnchanged": true,
+  "notVerified": [
+    "reboot",
+    "clock/timezone changes",
+    "usage revoke",
+    "StayFree comparison",
+    "notification permission and real delivery",
+    "TalkBack and large text",
+    "OEM backup/transfer",
+    "full split-screen/rotation/large-font layout matrix"
+  ],
+  "implementationCommit": "28897f6"
+}

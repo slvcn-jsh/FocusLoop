@@ -1,0 +1,20 @@
+
+
+dev.focusloop.spike.data.CoreRepositoryTest:...........
+
+dev.focusloop.spike.platform.SessionDatabaseTest:...
+
+dev.focusloop.spike.platform.UsageDeviceTest:.
+
+
+
+Time: 1.358
+
+
+
+OK (15 tests)
+
+
+
+
+

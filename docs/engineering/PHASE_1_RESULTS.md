@@ -1,5 +1,7 @@
 # Phase 1 feasibility findings
 
+Historical snapshot of the initial run. The user subsequently authorized continuation with a connected Fold5; see [current device and Phase 2 results](PHASE_2_RESULTS.md). The original observations below describe the earlier environment and are retained for traceability.
+
 Date: 2026-11-17. Status: **limited experiment implemented and automated static/JVM gates passed; device feasibility not yet established. STOP before phase 2.** Implementation commit: `5ea79a1`. Starter and phase 0 audit preserved in `7f1d203`. Git history is local; no remote upload or private usage collection was performed.
 
 ## Completed

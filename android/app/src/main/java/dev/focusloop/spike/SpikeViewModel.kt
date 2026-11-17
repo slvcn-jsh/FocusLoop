@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.focusloop.spike.domain.*
 import dev.focusloop.spike.platform.*
+import dev.focusloop.spike.data.CoreDatabase
+import dev.focusloop.spike.data.CoreRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
@@ -17,19 +19,21 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 data class SpikeState(
-    val session: Session? = null,
+    val core: CoreSnapshot = CoreSnapshot(),
     val sessionLoaded: Boolean = false,
     val sessionError: String? = null,
+    val storageFailed: Boolean = false,
     val busy: Boolean = false,
     val period: UsagePeriod = UsagePeriod.TODAY,
     val usage: UsageSnapshot? = null,
     val reminder: String = "Reminders are optional. No probe scheduled by this launch.",
     val restored: Boolean = false,
-)
+) { val session: Session? get() = core.current?.session }
 
 class SpikeViewModel(app: Application) : AndroidViewModel(app) {
-    private val database = SessionDatabase(app)
-    private val sessions = SessionExperiment(database)
+    private val database = CoreDatabase.open(app)
+    private val legacy = if (app.getDatabasePath("feasibility.db").exists()) SessionDatabase(app) else null
+    private val sessions = CoreRepository(database, legacy)
     private val clock = AndroidClock(app)
     private val usage = AndroidUsage(app)
     private val lock = Mutex()
@@ -57,36 +61,35 @@ class SpikeViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun reloadSession() = change {
-        val restored = sessions.restore(clock.read())
-        mutable.update { it.copy(restored = restored != null) }
-        restored
-    }
+    fun reloadSession() = change { mutable.update { it.copy(restored = true) } }
 
-    fun start(title: String, minutes: String) = change {
-        sessions.start(title, minutes.toIntOrNull() ?: 0, clock.read()).also {
-            mutable.update { current -> current.copy(restored = false) }
-        }
+    fun start(title: String, minutes: String, target: String?, reminderPreferred: Boolean) = change {
+        sessions.start(Intention(title = title, plannedMinutes = minutes.toIntOrNull() ?: 0,
+            targetPackage = target, reminderPreferred = reminderPreferred), clock.read())
+        mutable.update { it.copy(restored = false) }
     }
 
     fun act(event: EventKind) = change {
-        sessions.act(event, clock.read(), if (event == EventKind.EXTEND) 300_000 else 0)
+        sessions.act(requireNotNull(state.value.core.current).id, event, clock.read(), if (event == EventKind.EXTEND) 300_000 else 0)
     }
 
-    fun clear() = change { sessions.clear(); mutable.update { it.copy(restored = false) }; null }
+    fun saveIntention(value: Intention) = change { sessions.saveIntention(value) }
+    fun deleteIntention(id: Long) = change { sessions.deleteIntention(id) }
+    fun reflect(id: Long, outcome: ReportedOutcome) = change { sessions.reflect(id, outcome, clock.read()) }
+    fun clear() = change { sessions.clearHistory(); mutable.update { it.copy(restored = false) } }
 
-    private fun change(operation: () -> Session?) {
+    private fun change(operation: () -> Unit) {
         viewModelScope.launch {
             lock.withLock {
                 mutable.update { it.copy(busy = true) }
                 try {
-                    val session = withContext(Dispatchers.IO) { operation() }
-                    mutable.update { it.copy(session = session, sessionLoaded = true, sessionError = null) }
+                    val snapshot = withContext(Dispatchers.IO) { operation(); sessions.load(clock.read()) }
+                    mutable.update { it.copy(core = snapshot, sessionLoaded = true, sessionError = null, storageFailed = false) }
                 } catch (e: CancellationException) {
                     throw e
                 } catch (e: Exception) {
-                    mutable.update { it.copy(sessionError = if (e is IllegalArgumentException) e.message
-                        else "Could not read or save the session. Existing record retained; retry or explicitly clear it.") }
+                    mutable.update { it.copy(storageFailed = e !is IllegalArgumentException, sessionError = if (e is IllegalArgumentException) e.message
+                        else "Could not read or save local records. Retry, or explicitly clear history. No success was recorded.") }
                 } finally { mutable.update { it.copy(busy = false) } }
             }
         }
@@ -95,19 +98,25 @@ class SpikeViewModel(app: Application) : AndroidViewModel(app) {
     /** Only while STARTED. No timer service, wake lock, or per-second database writes. */
     suspend fun tick() {
         lock.withLock {
-            val saved = state.value.session
-            if (saved != null && state.value.sessionError == null) {
+            val savedRecord = state.value.core.current
+            val saved = savedRecord?.session
+            if (saved != null && !state.value.storageFailed) {
                 val now = withContext(Dispatchers.IO) { clock.read() }
                 val projected = SessionRules.project(saved, now)
                 try {
                     if (projected.status == SessionStatus.RECOVERY_REQUIRED && projected != saved) {
-                        withContext(Dispatchers.IO) { database.write(projected) }
+                        val recovered = withContext(Dispatchers.IO) {
+                            sessions.saveRecovery(savedRecord.id, now)
+                            sessions.load(now)
+                        }
+                        mutable.update { it.copy(core = recovered) }
+                    } else {
+                        mutable.update { it.copy(core = it.core.copy(current = savedRecord.copy(session = projected))) }
                     }
-                    mutable.update { it.copy(session = projected) }
                 } catch (e: CancellationException) {
                     throw e
                 } catch (_: Exception) {
-                    mutable.update { it.copy(sessionError = "Recovery could not be saved. Existing record retained.") }
+                    mutable.update { it.copy(storageFailed = true, sessionError = "Recovery could not be saved. Existing record retained.") }
                 }
             }
         }
@@ -135,5 +144,5 @@ class SpikeViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    override fun onCleared() { database.close() }
+    override fun onCleared() { database.close(); legacy?.close() }
 }

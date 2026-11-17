@@ -14,7 +14,7 @@ class CoreRepository(private val db: CoreDatabase, private val legacy: SessionSt
         dao.saveMetadata(MetadataRow(IMPORT_KEY, "done"))
     }
 
-    fun load(now: ClockMark): CoreSnapshot = transaction {
+    fun load(now: ClockMark, historyLimit: Int = 100): CoreSnapshot = transaction {
         initialize()
         val current = (dao.active() ?: dao.latest())?.let(::record)?.let { saved ->
             val projected = SessionRules.project(saved.session, now)
@@ -22,7 +22,7 @@ class CoreRepository(private val db: CoreDatabase, private val legacy: SessionSt
             saved.copy(session = projected)
         }
         CoreSnapshot(current, dao.intentions().map { Intention(it.id, it.title, it.plannedMinutes, it.targetPackage, it.reminderPreferred) },
-            dao.history().map(::record))
+            dao.history(historyLimit).map(::record), dao.historyCount())
     }
 
     fun saveIntention(value: Intention): Long = transaction {
@@ -36,14 +36,24 @@ class CoreRepository(private val db: CoreDatabase, private val legacy: SessionSt
     }
 
     fun deleteIntention(id: Long) = transaction { initialize(); dao.deleteIntention(id) }
+    fun clearIntentions() = transaction { initialize(); dao.clearIntentions() }
 
-    fun start(value: Intention, now: ClockMark): Long = transaction {
+    fun start(value: Intention, now: ClockMark, saveAsTemplate: Boolean = false): Long = transaction {
         initialize()
         val valid = IntentionRules.validate(value)
         val existing = dao.active()?.let(::record)?.session
         val session = SessionRules.start(existing, valid.title, valid.plannedMinutes, now)
+        if (saveAsTemplate) saveIntention(valid)
         insert(session, valid.targetPackage, valid.reminderPreferred)
     }
+
+    fun revise(id: Long, title: String, now: ClockMark) = transaction {
+        initialize()
+        val saved = record(requireNotNull(dao.session(id)))
+        persist(saved, SessionRules.revise(saved.session, title, now))
+    }
+
+    fun find(id: Long): SessionRecord? = transaction { initialize(); dao.session(id)?.let(::record) }
 
     fun act(id: Long, kind: EventKind, now: ClockMark, addedMs: Long = 0) = transaction {
         initialize()
@@ -97,9 +107,9 @@ class CoreRepository(private val db: CoreDatabase, private val legacy: SessionSt
         session.activeMs, session.elapsedMs, session.status.name, session.hasUnknownGap,
         if (session.isOpen) 1 else null, target, reminder)
 
-    private fun eventRow(id: Long, index: Int, event: SessionEvent) = EventRow(id, index, event.kind.name, event.wallMs, event.addedMs)
+    private fun eventRow(id: Long, index: Int, event: SessionEvent) = EventRow(id, index, event.kind.name, event.wallMs, event.addedMs, event.note)
     private fun record(row: SessionRow): SessionRecord {
-        val events = dao.events(row.id).map { SessionEvent(EventKind.valueOf(it.kind), it.wallMs, it.addedMs) }
+        val events = dao.events(row.id).map { SessionEvent(EventKind.valueOf(it.kind), it.wallMs, it.addedMs, it.note) }
         val reflection = dao.reflection(row.id)?.let { Reflection(ReportedOutcome.valueOf(it.outcome), it.recordedWallMs) }
         return SessionRecord(row.id, Session(row.title, row.originalPlanMs, ClockMark(row.wallMs, row.elapsedAnchorMs, row.boot),
             row.activeMs, row.elapsedMs, SessionStatus.valueOf(row.status), row.unknownGap, events), row.targetPackage, row.reminderPreferred, reflection)

@@ -2,8 +2,8 @@ package dev.focusloop.spike.domain
 
 data class ClockMark(val wallMs: Long, val elapsedMs: Long, val boot: Int?)
 enum class SessionStatus { RUNNING, PAUSED, RECOVERY_REQUIRED, FINISHED, CANCELLED }
-enum class EventKind { START, PAUSE, RESUME, EXTEND, RECOVER, FINISH, CANCEL }
-data class SessionEvent(val kind: EventKind, val wallMs: Long, val addedMs: Long = 0)
+enum class EventKind { START, PAUSE, RESUME, EXTEND, RECOVER, FINISH, CANCEL, REVISE }
+data class SessionEvent(val kind: EventKind, val wallMs: Long, val addedMs: Long = 0, val note: String? = null)
 
 /** App-owned experiment data. Neither device usage nor a self-reported outcome. */
 data class Session(
@@ -18,6 +18,7 @@ data class Session(
 ) {
     val isOpen: Boolean get() = status !in setOf(SessionStatus.FINISHED, SessionStatus.CANCELLED)
     val targetMs: Long get() = originalPlanMs + events.sumOf { it.addedMs }
+    val currentTitle: String get() = events.lastOrNull { it.kind == EventKind.REVISE }?.note ?: title
 }
 
 object SessionRules {
@@ -68,6 +69,13 @@ object SessionRules {
         require(event == EventKind.EXTEND || addedMs == 0L)
         return current.copy(anchor = now, status = status,
             events = current.events + SessionEvent(event, now.wallMs, addedMs))
+    }
+
+    fun revise(session: Session, title: String, now: ClockMark): Session {
+        val current = project(session, now)
+        require(current.isOpen) { "This session has already ended." }
+        require(title.isNotBlank() && title.length <= 120) { "Enter an intention (1-120 characters)." }
+        return current.copy(events = current.events + SessionEvent(EventKind.REVISE, now.wallMs, note = title.trim()))
     }
 }
 

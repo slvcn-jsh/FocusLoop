@@ -6,6 +6,7 @@ import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.SupportSQLiteOpenHelper
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
+import androidx.room.migration.Migration
 
 @Entity(tableName = "intentions")
 data class IntentionRow(@PrimaryKey(autoGenerate = true) val id: Long = 0, val title: String,
@@ -19,7 +20,7 @@ data class SessionRow(@PrimaryKey(autoGenerate = true) val id: Long = 0, val tit
 
 @Entity(tableName = "session_events", primaryKeys = ["sessionId", "position"], foreignKeys = [
     ForeignKey(entity = SessionRow::class, parentColumns = ["id"], childColumns = ["sessionId"], onDelete = ForeignKey.CASCADE)])
-data class EventRow(val sessionId: Long, val position: Int, val kind: String, val wallMs: Long, val addedMs: Long)
+data class EventRow(val sessionId: Long, val position: Int, val kind: String, val wallMs: Long, val addedMs: Long, val note: String? = null)
 
 @Entity(tableName = "reflections", foreignKeys = [
     ForeignKey(entity = SessionRow::class, parentColumns = ["id"], childColumns = ["sessionId"], onDelete = ForeignKey.CASCADE)])
@@ -33,7 +34,8 @@ interface CoreDao {
     @Query("SELECT * FROM sessions WHERE activeSlot = 1 LIMIT 1") fun active(): SessionRow?
     @Query("SELECT * FROM sessions ORDER BY id DESC LIMIT 1") fun latest(): SessionRow?
     @Query("SELECT * FROM sessions WHERE id = :id") fun session(id: Long): SessionRow?
-    @Query("SELECT * FROM sessions WHERE activeSlot IS NULL ORDER BY id DESC LIMIT 100") fun history(): List<SessionRow>
+    @Query("SELECT * FROM sessions WHERE activeSlot IS NULL ORDER BY id DESC LIMIT :limit") fun history(limit: Int = 100): List<SessionRow>
+    @Query("SELECT COUNT(*) FROM sessions WHERE activeSlot IS NULL") fun historyCount(): Int
     @Query("SELECT * FROM session_events WHERE sessionId = :id ORDER BY position") fun events(id: Long): List<EventRow>
     @Query("SELECT * FROM reflections WHERE sessionId = :id") fun reflection(id: Long): ReflectionRow?
     @Query("SELECT * FROM intentions ORDER BY id DESC") fun intentions(): List<IntentionRow>
@@ -47,16 +49,20 @@ interface CoreDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE) fun saveMetadata(value: MetadataRow)
     @Query("DELETE FROM sessions") fun clearSessions()
     @Query("DELETE FROM intentions WHERE id = :id") fun deleteIntention(id: Long)
+    @Query("DELETE FROM intentions") fun clearIntentions()
 }
 
 @Database(entities = [IntentionRow::class, SessionRow::class, EventRow::class, ReflectionRow::class, MetadataRow::class],
-    version = 1, exportSchema = true)
+    version = 2, exportSchema = true)
 abstract class CoreDatabase : RoomDatabase() {
     abstract fun core(): CoreDao
     companion object {
         fun open(context: Context, name: String = "focusloop-core.db"): CoreDatabase =
             Room.databaseBuilder(context.applicationContext, CoreDatabase::class.java, name)
-                .openHelperFactory(PreservingOpenHelperFactory).build()
+                .openHelperFactory(PreservingOpenHelperFactory).addMigrations(MIGRATION_1_2).build()
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) { db.execSQL("ALTER TABLE session_events ADD COLUMN note TEXT") }
+        }
         // No destructive migration or main-thread-query fallback.
     }
 }

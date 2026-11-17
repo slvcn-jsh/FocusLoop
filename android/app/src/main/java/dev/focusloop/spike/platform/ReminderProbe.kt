@@ -20,7 +20,7 @@ class ReminderProbe(private val context: Context) {
     private val manager = context.getSystemService(NotificationManager::class.java)
     private val prefs = context.getSharedPreferences("reminder_probe", Context.MODE_PRIVATE)
     init {
-        manager.createNotificationChannel(NotificationChannel(CHANNEL, "Feasibility reminder", NotificationManager.IMPORTANCE_DEFAULT))
+        manager.createNotificationChannel(NotificationChannel(CHANNEL, "Test reminders", NotificationManager.IMPORTANCE_DEFAULT))
     }
     fun permitted(): Boolean =
         (Build.VERSION.SDK_INT < 33 || context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) &&
@@ -32,10 +32,10 @@ class ReminderProbe(private val context: Context) {
     fun schedule(): String {
         if (!permitted()) return "Notifications unavailable or disabled. Session timing is unaffected."
         val due = SystemClock.elapsedRealtime() + 60_000
-        val boot = AndroidClock(context).read().boot ?: return "Boot identity unavailable; probe not scheduled."
+        val boot = AndroidClock(context).read().boot ?: return "Reliable timing is unavailable; no test reminder was scheduled."
         prefs.edit().clear().putLong("due", due).putInt("boot", boot).apply()
         context.getSystemService(AlarmManager::class.java).set(AlarmManager.ELAPSED_REALTIME_WAKEUP, due, pending())
-        return "Inexact probe scheduled for no earlier than 60 seconds; delivery may be delayed."
+        return "Test reminder requested for about one minute from now. Android may delay it."
     }
     fun cancel(): String {
         context.getSystemService(AlarmManager::class.java).cancel(pending())
@@ -65,7 +65,7 @@ class ReminderReceiver : BroadcastReceiver() {
         val open = PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val notification = Notification.Builder(context, ReminderProbe.CHANNEL)
-            .setSmallIcon(R.drawable.ic_reminder).setContentTitle("FocusLoop reminder experiment")
+            .setSmallIcon(R.drawable.ic_reminder).setContentTitle("FocusLoop test reminder")
             .setContentText("A voluntary timing check. You can dismiss this reminder.")
             .setContentIntent(open).setAutoCancel(true).build()
         try { context.getSystemService(NotificationManager::class.java).notify(1, notification) }

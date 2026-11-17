@@ -22,4 +22,4 @@ data class Reflection(val outcome: ReportedOutcome, val recordedWallMs: Long)
 data class SessionRecord(val id: Long, val session: Session, val targetPackage: String?,
     val reminderPreferred: Boolean, val reflection: Reflection?)
 data class CoreSnapshot(val current: SessionRecord? = null, val intentions: List<Intention> = emptyList(),
-    val history: List<SessionRecord> = emptyList())
+    val history: List<SessionRecord> = emptyList(), val historyTotal: Int = history.size)

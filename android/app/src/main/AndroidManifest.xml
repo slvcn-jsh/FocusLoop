@@ -7,7 +7,7 @@
         android:allowBackup="false"
         android:fullBackupContent="@xml/backup_rules"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:label="FocusLoop Feasibility"
+        android:label="FocusLoop"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.FocusLoop"
         android:supportsRtl="true">
@@ -18,5 +18,6 @@
             </intent-filter>
         </activity>
         <receiver android:name=".platform.ReminderReceiver" android:exported="false" />
+        <receiver android:name=".platform.SessionReminderReceiver" android:exported="false" />
     </application>
 </manifest>

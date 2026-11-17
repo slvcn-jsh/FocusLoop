@@ -14,7 +14,10 @@ class UsageDeviceTest {
         val adapter = AndroidUsage(InstrumentationRegistry.getInstrumentation().targetContext)
         assumeTrue("User has not opted into Usage Access", adapter.access() == UsageAccess.GRANTED)
         UsagePeriod.entries.forEach { period ->
-            val snapshot = adapter.query(period)
+            val snapshot = adapter.query(period, if (period == UsagePeriod.CUSTOM) {
+                val today = java.time.LocalDate.now()
+                CustomDates(today.minusDays(3), today)
+            } else null)
             assertEquals(UsageAccess.GRANTED, snapshot.access)
             assertTrue(snapshot.requested.startMs <= snapshot.requested.endMs)
             assertFalse("Android service did not return an accessible result for ${period.name}", snapshot.result is UsageResult.Unavailable)

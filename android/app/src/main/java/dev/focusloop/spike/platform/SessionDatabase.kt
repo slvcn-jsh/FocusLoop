@@ -45,6 +45,7 @@ internal fun encodeSession(s: Session): String = JSONObject().apply {
     put("events", JSONArray().apply {
         s.events.forEach { e -> put(JSONObject().apply {
             put("kind", e.kind.name); put("wall", e.wallMs); put("added", e.addedMs)
+            put("note", e.note ?: JSONObject.NULL)
         }) }
     })
 }.toString()
@@ -58,7 +59,8 @@ internal fun decodeSession(raw: String): Session {
         j.getLong("active"), j.getLong("elapsed"), SessionStatus.valueOf(j.getString("status")),
         j.getBoolean("unknown"), List(events.length()) { index ->
             events.getJSONObject(index).let {
-                SessionEvent(EventKind.valueOf(it.getString("kind")), it.getLong("wall"), it.getLong("added"))
+                SessionEvent(EventKind.valueOf(it.getString("kind")), it.getLong("wall"), it.getLong("added"),
+                    if (it.isNull("note")) null else it.getString("note"))
             }
         }).also {
         check(it.originalPlanMs in 60_000L..86_400_000L && it.activeMs >= 0 && it.elapsedMs >= it.activeMs)

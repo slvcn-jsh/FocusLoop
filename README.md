@@ -1,6 +1,6 @@
 # FocusLoop — Android Development Starter
 
-Research-backed, native Android digital wellbeing application. **This repository is a documentation and visual-reference starter, not a compiled Android application.** Codex must inspect this workspace and initialize the Gradle/Android Studio project inside `android/` as its first implementation task. Do not invent completed tests or implemented capabilities.
+Research-backed, native Android digital wellbeing application. The supplied documentation and visual-reference starter is preserved in Git. `android/` now contains the **phase 1 feasibility experiment**, not the production app. See [audit](docs/engineering/PHASE_0_AUDIT.md), [findings](docs/engineering/PHASE_1_RESULTS.md), and [Fold5 test procedure](docs/qa/PHASE_1_FOLD5_CHECKLIST.md).
 
 ## Read first
 1. `AGENTS.md` — permanent Codex rules.
@@ -19,4 +19,4 @@ Verified Android/platform behavior and safety > approved product requirements > 
 - Earlier wireframe: `design/wireframes/FocusLoop_Canva_Wireframe_Reference_v1.pdf`.
 
 ## Status
-Research synthesis and initial UX direction documented; actual Fold5 device validation, source code, and production UI are **not completed**.
+Research synthesis and initial UX direction documented; limited native diagnostic source added under `android/`. Actual Fold5 validation and production UI remain pending. **Stop gate: review phase 1 findings before authorizing phase 2 or later.** The results report distinguishes automated evidence from unrun device checks.

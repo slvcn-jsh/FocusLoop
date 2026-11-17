@@ -1,0 +1,167 @@
+{
+  "date": "2026-11-17",
+  "phase": "1 feasibility only",
+  "buildCommand": ".\\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:assembleDebugAndroidTest --console=plain",
+  "buildResult": "PASS",
+  "buildSummary": "BUILD SUCCESSFUL in 26s",
+  "jvmSuites": [
+    {
+      "name": "dev.focusloop.spike.domain.SessionTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        "newRepositoryRestoresFromPersistedAnchor",
+        "backwardsMonotonicClockRequiresRecovery",
+        "onlyOneOpenSession",
+        "unavailableBootIdentityIsExplicit",
+        "extensionAppendsAndPreservesOriginalPlan",
+        "writeFailureDoesNotReportANewSession",
+        "validatesTitleAndDuration",
+        "invalidExtensionRejected",
+        "targetDoesNotForceCompletion",
+        "rebootEvenWithGreaterUptimeDoesNotInventDuration",
+        "wallClockJumpsDoNotChangeDuration",
+        "finishAndCancelAreTerminalAndAllowAnotherExperiment",
+        "activeExcludesPauseAndElapsedIncludesIt",
+        "pausedSessionStillOwnsTheSlot",
+        "invalidPauseResumeSequenceRejected",
+        "recoveryResumesOnlyFromExplicitNewAnchor",
+        "sleepAndBackgroundIntervalsAreIncludedFromMonotonicClock",
+        "runningRebootUsesOnlyPersistedCheckpoint"
+      ]
+    },
+    {
+      "name": "dev.focusloop.spike.domain.UsageTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        "invalidRecordsAreNotShownAsValidUsage",
+        "emptyNullAndMeasuredZeroAreDistinct",
+        "dailyBucketExpansionIsNotClippedOrHidden",
+        "localDayRangesFollowManilaCalendar",
+        "calendarDayIsNotAlways24Hours",
+        "midnightDoesNotCreateFakeTodayUsage",
+        "grantedDeniedRevokedAndUnavailableAreDistinct",
+        "perPackageBucketsAreSummedAndRanked"
+      ]
+    }
+  ],
+  "lintIssues": [
+    {
+      "id": "OldTargetApi",
+      "severity": "Warning",
+      "message": "Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details."
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.compose:compose-bom than 2024.10.00 is available: 2026.09.00"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.activity:activity-compose than 1.9.3 is available: 1.13.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.8.7 is available: 2.11.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.lifecycle:lifecycle-runtime-compose than 2.8.7 is available: 2.11.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.test.ext:junit than 1.2.1 is available: 1.3.0"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of androidx.test:runner than 1.6.2 is available: 1.7.0"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    },
+    {
+      "id": "UseKtx",
+      "severity": "Warning",
+      "message": "Use the KTX extension function `SharedPreferences.edit` instead?"
+    }
+  ],
+  "instrumentation": {
+    "compiled": true,
+    "executed": false,
+    "testCount": 3,
+    "reason": "No physical device. Temporary read-only API 36.1 emulator failed to finish boot; stopped."
+  },
+  "physicalFold5": "NOT RUN",
+  "appScreenshots": "NOT CAPTURED - no runtime validation",
+  "originalDesignAssets": [
+    {
+      "path": "design/canva_exports/1.png",
+      "sha256": "d73bb9c58b054694d99c8640e5e2528f4823038f030d0fed1e45d42b52d6c88d"
+    },
+    {
+      "path": "design/canva_exports/10.png",
+      "sha256": "ca15462824e1f66a78af7ad743da467198cb77f63536e23b84012c8514804f39"
+    },
+    {
+      "path": "design/canva_exports/2.png",
+      "sha256": "cc08125921ee6871f915fdc5dfc9be48d4b5f6cf2de14af33b157b911a8e02d3"
+    },
+    {
+      "path": "design/canva_exports/3.png",
+      "sha256": "15727d1552f3d19d56a6b2e1a73feee47ecc1ddefd884946647b5740a175ab16"
+    },
+    {
+      "path": "design/canva_exports/4.png",
+      "sha256": "4d4216cbb7e75de035b5a8d5ed069cde0c6577213ae590c3335e0bb8dbc6c9ad"
+    },
+    {
+      "path": "design/canva_exports/5.png",
+      "sha256": "9625da9a11c9181f9a574422394a18eef6cf5e95868f9524d6ca50c6bb08e770"
+    },
+    {
+      "path": "design/canva_exports/6.png",
+      "sha256": "f15a271b94b42da88a35fe25a3d1fb213775ec35ce3c03d0382d43ae7c3a496d"
+    },
+    {
+      "path": "design/canva_exports/7.png",
+      "sha256": "2ea5c84e29f056c9e1304efcc2747c4183fcf206de72555a6875460338395175"
+    },
+    {
+      "path": "design/canva_exports/9.png",
+      "sha256": "c5b1e674d30651cbd51f6e139293498a26e4e764ec4b234b324fbb4e6ecc1857"
+    },
+    {
+      "path": "design/canva_exports/FocusLoop Design System.png",
+      "sha256": "5d5067ea327c69fb3c2e3af87c9b6c2029de57a947296ae0add114453b3ebbe7"
+    },
+    {
+      "path": "design/wireframes/FocusLoop_Canva_Wireframe_Reference_v1.pdf",
+      "sha256": "6ee91d7cb0d1ce6812ca81d6aab1f378319dbd637e267df32509210cc5bb259b"
+    },
+    {
+      "path": "design/wireframes/wireframe_extracted_text.txt",
+      "sha256": "fa3ae23666ca7d550f48e63caefb90e02a0e2aa617e43d58e2cbe482919d9f6f"
+    }
+  ],
+  "apkSha256": "c0db20babd8e47898b93c43924870f8a23434fc6e31c5bb71e7b5fb866117d10"
+}
